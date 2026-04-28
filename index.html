@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stealth Strength Academy — Become Unstoppable</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080A0C;
+    --dark: #0E1217;
+    --card: #13181F;
+    --border: rgba(0,255,180,0.12);
+    --teal: #00FFB4;
+    --teal-dim: rgba(0,255,180,0.08);
+    --white: #F0F4F8;
+    --muted: #7A8A99;
+    --accent2: #00C8FF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 999; opacity: .4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 40px;
+    backdrop-filter: blur(20px);
+    background: rgba(8,10,12,0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; letter-spacing: 3px;
+    color: var(--teal);
+  }
+  .nav-cta {
+    background: var(--teal); color: var(--black);
+    padding: 10px 24px; border-radius: 4px;
+    font-weight: 600; font-size: .85rem; letter-spacing: 1px;
+    text-decoration: none; text-transform: uppercase;
+    transition: opacity .2s;
+  }
+  .nav-cta:hover { opacity: .85; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0,255,180,0.07) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border);
+    background: var(--teal-dim);
+    padding: 8px 20px; border-radius: 100px;
+    font-size: .8rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 32px;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); display: inline-block; }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: .92; letter-spacing: 2px;
+    animation: fadeUp .8s .1s ease both;
+  }
+  .hero h1 em { color: var(--teal); font-style: normal; }
+  .hero-sub {
+    max-width: 560px; margin: 28px auto 0;
+    font-size: 1.1rem; line-height: 1.7; color: var(--muted);
+    animation: fadeUp .8s .2s ease both;
+  }
+  .hero-sub strong { color: var(--white); font-weight: 600; }
+  .hero-actions {
+    display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp .8s .3s ease both;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--black);
+    padding: 16px 40px; border-radius: 4px;
+    font-weight: 700; font-size: 1rem; letter-spacing: 1px;
+    text-decoration: none; text-transform: uppercase;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 0 40px rgba(0,255,180,0.25);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,255,180,0.4); }
+  .btn-ghost {
+    border: 1px solid var(--border); color: var(--white);
+    padding: 16px 40px; border-radius: 4px;
+    font-weight: 400; font-size: 1rem;
+    text-decoration: none;
+    transition: border-color .2s, color .2s;
+  }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--muted); font-size: .75rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: fadeUp .8s .5s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 48px; background: linear-gradient(to bottom, var(--teal), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ── STATS ── */
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    max-width: 800px; margin: 0 auto;
+    border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+    background: var(--card);
+  }
+  .stat {
+    padding: 36px 24px; text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.2rem; color: var(--teal); line-height: 1;
+  }
+  .stat-label { font-size: .8rem; color: var(--muted); letter-spacing: 1px; margin-top: 6px; text-transform: uppercase; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 24px; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-tag {
+    font-size: .75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    line-height: 1; margin-bottom: 20px;
+  }
+  .section-body { color: var(--muted); font-size: 1.05rem; line-height: 1.8; max-width: 620px; }
+
+  /* ── WHAT'S INSIDE ── */
+  .guide-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    margin-top: 60px;
+  }
+  .guide-card {
+    background: var(--card); padding: 36px 28px;
+    transition: background .2s;
+  }
+  .guide-card:hover { background: #181F28; }
+  .guide-icon { font-size: 2rem; margin-bottom: 16px; }
+  .guide-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
+  .guide-card p { color: var(--muted); font-size: .9rem; line-height: 1.6; }
+
+  /* ── PROGRAM ── */
+  .program-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 60px;
+  }
+  @media(max-width:680px) { .program-grid { grid-template-columns: 1fr; } }
+  .program-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 40px 32px;
+    position: relative; overflow: hidden;
+  }
+  .program-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--accent2));
+  }
+  .program-card .week { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--border); position: absolute; bottom: 16px; right: 24px; line-height: 1; }
+  .program-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 12px; }
+  .program-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .program-card ul li { color: var(--muted); font-size: .95rem; display: flex; gap: 10px; }
+  .program-card ul li::before { content: '→'; color: var(--teal); flex-shrink: 0; }
+
+  /* ── COACH ── */
+  .coach-block {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center; margin-top: 60px;
+  }
+  @media(max-width:700px) { .coach-block { grid-template-columns: 1fr; } }
+  .coach-img-wrap {
+    aspect-ratio: 3/4; background: var(--card);
+    border-radius: 8px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .coach-img-placeholder {
+    font-size: 6rem; opacity: .15;
+  }
+  .coach-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,.8));
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px;
+    color: var(--white);
+  }
+  .coach-name { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--teal); line-height: 1; }
+  .coach-title { color: var(--muted); font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+  .coach-bio { color: var(--muted); line-height: 1.8; font-size: 1rem; }
+  .coach-bio strong { color: var(--white); }
+
+  /* ── FAQ ── */
+  .faq-list { margin-top: 60px; display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .faq-item { background: var(--card); }
+  .faq-q {
+    width: 100%; padding: 24px 28px; text-align: left;
+    background: none; border: none; color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; transition: color .2s; gap: 16px;
+  }
+  .faq-q:hover { color: var(--teal); }
+  .faq-q .arrow { color: var(--teal); font-size: 1.2rem; flex-shrink: 0; transition: transform .3s; }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease, padding .35s ease;
+    color: var(--muted); font-size: .95rem; line-height: 1.7;
+    padding: 0 28px;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 28px 24px; }
+  .faq-item.open .arrow { transform: rotate(45deg); }
+  .faq-sep { height: 1px; background: var(--border); }
+
+  /* ── PRICE ── */
+  .price-block {
+    max-width: 560px; margin: 60px auto 0;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; text-align: center;
+  }
+  .price-top {
+    background: linear-gradient(135deg, rgba(0,255,180,0.08), rgba(0,200,255,0.05));
+    padding: 48px 40px 36px; border-bottom: 1px solid var(--border);
+  }
+  .price-label { font-size: .75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 6rem; color: var(--teal); line-height: 1; }
+  .price-period { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+  .price-desc { color: var(--muted); margin-top: 16px; font-size: .95rem; line-height: 1.6; }
+  .price-body { padding: 36px 40px; }
+  .price-includes { list-style: none; display: flex; flex-direction: column; gap: 12px; text-align: left; margin-bottom: 32px; }
+  .price-includes li { display: flex; gap: 12px; color: var(--muted); font-size: .95rem; }
+  .price-includes li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+  .price-includes li strong { color: var(--white); }
+  .btn-book {
+    display: block; width: 100%;
+    background: var(--teal); color: var(--black);
+    padding: 18px; border-radius: 6px;
+    font-weight: 700; font-size: 1rem; letter-spacing: 1px;
+    text-decoration: none; text-transform: uppercase;
+    transition: opacity .2s, transform .2s;
+    box-shadow: 0 0 40px rgba(0,255,180,0.2);
+  }
+  .btn-book:hover { opacity: .88; transform: translateY(-1px); }
+  .price-note { color: var(--muted); font-size: .8rem; margin-top: 14px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 24px; text-align: center;
+    color: var(--muted); font-size: .85rem;
+  }
+  footer strong { color: var(--teal); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: .4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:600px) {
+    nav { padding: 16px 20px; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Stealth Strength</div>
+  <a href="#book" class="nav-cta">Book a Session</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><span></span> 3-Month Transformation Program</div>
+  <h1>Become the Person<br>You've Always <em>Desired</em></h1>
+  <p class="hero-sub">
+    Break free from limitations and unlock your full potential. This 3-month coaching journey transforms your 
+    <strong>mindset, habits, and life</strong> — empowering you to achieve lasting success and fulfillment.
+  </p>
+  <div class="hero-actions">
+    <a href="#book" class="btn-primary">Book Your Session — $150</a>
+    <a href="#program" class="btn-ghost">See the Program</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- STATS -->
+<div style="max-width:1000px;margin:0 auto;padding:0 24px 80px;">
+  <div class="stats">
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Months of 1-on-1 Coaching</div></div>
+    <div class="stat"><div class="stat-num">9–12</div><div class="stat-label">Minutes Daily to Start</div></div>
+    <div class="stat"><div class="stat-num">14</div><div class="stat-label">Days to Feel the Shift</div></div>
+  </div>
+</div>
+
+<!-- FREE GUIDE -->
+<section id="guide" style="background: var(--dark);">
+  <div class="section-inner">
+    <div class="section-tag">🔥 Free Starter Guide</div>
+    <h2 class="section-title">7-Day Bodyweight<br>Strength Guide</h2>
+    <p class="section-body">Your free entry point. No gym. No equipment. Just 9–12 minutes a day to build real strength, discipline, and momentum — starting from wherever you are right now.</p>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-icon">📍</div>
+        <h3>Initial Assessment</h3>
+        <p>Find your exact baseline with a 1-minute pushup test. Your program adapts to your real level — not a template.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-icon">🏋️</div>
+        <h3>Days 1–7: Foundation</h3>
+        <p>Pushups + crunches, progressive reps, personalised sets. 3 sets for beginners, up to 5 for advanced. Done in under 12 minutes.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-icon">🎁</div>
+        <h3>Days 8–14: Finisher Phase</h3>
+        <p>Squats added. A brutal 20-minute AMRAP circuit. This is where mental toughness gets built — not just muscle.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-icon">🍌</div>
+        <h3>Post-Workout Refuel</h3>
+        <p>Simple, fast food protocol. No meal prep obsession. Banana, nuts, milk — what actually works in real life.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-icon">🚿</div>
+        <h3>Recovery Protocol</h3>
+        <p>Warm-to-cold shower system. Reduces inflammation, accelerates recovery, builds resilience — in 10 minutes.</p>
+      </div>
+      <div class="guide-card">
+        <div class="guide-icon">🧠</div>
+        <h3>Focus System</h3>
+        <p>Phone on airplane mode. Full presence. Track progress with apps like Strava. Discipline starts before the first rep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="program">
+  <div class="section-inner">
+    <div class="section-tag">🚀 3-Month Coaching</div>
+    <h2 class="section-title">From Stuck to<br><em style="color:var(--teal);font-style:normal;">Unstoppable</em></h2>
+    <p class="section-body">Weekly 1-on-1 sessions tailored to your specific situation. Not a template. Not a group chat. Your transformation, your pace, your life.</p>
+    <div class="program-grid">
+      <div class="program-card">
+        <div class="week">01</div>
+        <h3>Month 1 — Foundation</h3>
+        <ul>
+          <li>Deep-dive assessment of where you are</li>
+          <li>Identify the 3 habits blocking your growth</li>
+          <li>Build your baseline physical routine</li>
+          <li>Establish non-negotiable daily anchors</li>
+        </ul>
+      </div>
+      <div class="program-card">
+        <div class="week">02</div>
+        <h3>Month 2 — Momentum</h3>
+        <ul>
+          <li>Mindset restructuring under pressure</li>
+          <li>Work performance & focus optimisation</li>
+          <li>Relationship & family dynamics coaching</li>
+          <li>Physical progression to intermediate level</li>
+        </ul>
+      </div>
+      <div class="program-card">
+        <div class="week">03</div>
+        <h3>Month 3 — Mastery</h3>
+        <ul>
+          <li>Locking in identity-level changes</li>
+          <li>Building systems that run without willpower</li>
+          <li>Advanced physical & mental challenges</li>
+          <li>90-day review + next chapter planning</li>
+        </ul>
+      </div>
+      <div class="program-card" style="background: var(--teal-dim); border-color: rgba(0,255,180,0.25);">
+        <div class="week" style="color:rgba(0,255,180,0.15)">∞</div>
+        <h3>Every Week Includes</h3>
+        <ul>
+          <li>1-on-1 video session with Hatem</li>
+          <li>Personalised weekly action plan</li>
+          <li>Accountability check-in mid-week</li>
+          <li>Direct messaging access for questions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COACH -->
+<section style="background: var(--dark);">
+  <div class="section-inner">
+    <div class="section-tag">👤 Your Coach</div>
+    <div class="coach-block">
+      <div class="coach-img-wrap">
+        <div class="coach-img-placeholder">🏋️</div>
+        <div class="coach-label">Hatem Soliman</div>
+      </div>
+      <div>
+        <div class="coach-name">Hatem<br>Soliman</div>
+        <div class="coach-title">Mindset & Lifestyle Coach · Stealth Strength Academy</div>
+        <p class="coach-bio">
+          Hatem built Stealth Strength Academy around one belief: <strong>physical strength and mental resilience are the same thing, trained differently.</strong>
+          <br><br>
+          His approach is not about looking good on Instagram. It is about becoming the person you know you can be — in your body, your work, your relationships, and your mind.
+          <br><br>
+          The 3-month program is <strong>deliberately limited</strong> in availability. This is not a course you buy and forget. It is a weekly commitment between you and Hatem — one that delivers real, measurable change.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-inner">
+    <div class="section-tag">❓ Questions</div>
+    <h2 class="section-title">Frequently Asked</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What does the 3-Month Coaching Program include?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Weekly 1-on-1 video sessions with Hatem, a personalised action plan each week, mid-week accountability check-ins, direct messaging access between sessions, and a full 90-day transformation roadmap covering physical training, mindset, work performance, and personal development.</div>
+        <div class="faq-sep"></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long are the coaching sessions?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Each weekly session is 45–60 minutes via video call. Sessions are booked through the calendar system — you choose a time that works for you each week. No fixed slots that don't suit your schedule.</div>
+        <div class="faq-sep"></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is $150 per session worth it?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Consider what staying stuck is costing you — in performance, energy, relationships, and time. $150 is the price of one session with a coach who has one job: to make sure you are not in the same place in 90 days. Most clients report it pays for itself within the first month through increased focus and output alone.</div>
+        <div class="faq-sep"></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is this suitable for beginners?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Absolutely. The free 7-Day Guide is built for people who are starting from zero — no gym, no experience required. The coaching program meets you exactly where you are. Whether you are a complete beginner or someone who has been stuck at the same level for years, the program adapts to you.</div>
+        <div class="faq-sep"></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if I need to miss a session?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Life happens. Sessions can be rescheduled with 24 hours notice. The calendar system makes it easy to move things around without losing momentum. Consistency over 3 months matters more than perfection in any single week.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICE / BOOK -->
+<section id="book" style="background: var(--dark);">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-tag" style="text-align:center;">📅 Calendar Bookings</div>
+    <h2 class="section-title">Book Your Session</h2>
+    <p class="section-body" style="margin:0 auto 0;">Limited availability. Hatem works with a small number of clients at a time to ensure full focus on each person's transformation.</p>
+    <div class="price-block">
+      <div class="price-top">
+        <div class="price-label">1-on-1 Coaching Session</div>
+        <div class="price-amount">$150</div>
+        <div class="price-period">per session · 3-month program</div>
+        <p class="price-desc">With <strong style="color:var(--white)">Hatem Soliman</strong> · Stealth Strength Academy</p>
+      </div>
+      <div class="price-body">
+        <ul class="price-includes">
+          <li><strong>Weekly 1-on-1 video session</strong> tailored to you</li>
+          <li><strong>Holistic transformation</strong> — body, mindset, work, family</li>
+          <li><strong>Mid-week accountability</strong> check-in included</li>
+          <li><strong>Direct message access</strong> between sessions</li>
+          <li><strong>Free 7-Day Bodyweight Guide</strong> included on signup</li>
+        </ul>
+        <a href="https://whop.com/joined/stealth-strength-academy/" class="btn-book">Book Your Session →</a>
+        <p class="price-note">Secure checkout via Whop · Instant calendar confirmation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Stealth Strength Academy</strong> · Coaching by Hatem Soliman</p>
+  <p style="margin-top:8px;">© 2026 Stealth Strength Academy. All rights reserved.</p>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
