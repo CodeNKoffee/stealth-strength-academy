@@ -106,25 +106,26 @@
     display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap; justify-content: center;
     animation: fadeUp .8s .3s ease both;
   }
-  .btn-primary {
-    background: var(--teal); color: var(--black);
-    padding: 16px 40px; border-radius: 4px;
+  .btn-primary, .btn-ghost {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 280px;
+    height: 56px;
+    border-radius: 4px;
     font-weight: 700; font-size: 1rem; letter-spacing: 1px;
     text-decoration: none; text-transform: uppercase;
-    transition: transform .2s, box-shadow .2s;
+    transition: transform .2s, box-shadow .2s, border-color .2s, color .2s;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--black);
     box-shadow: 0 0 40px rgba(0,255,180,0.25);
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,255,180,0.4); }
   .btn-ghost {
     border: 1px solid var(--border); color: var(--white);
-    padding: 16px 40px; border-radius: 4px;
-    font-weight: 400; font-size: 1rem;
-    text-decoration: none;
-    transition: border-color .2s, color .2s;
   }
   .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
   .hero-scroll {
-    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    position: absolute; bottom: 100px; left: 0; right: 0; margin: 0 auto; width: fit-content;
     display: flex; flex-direction: column; align-items: center; gap: 8px;
     color: var(--muted); font-size: .75rem; letter-spacing: 2px; text-transform: uppercase;
     animation: fadeUp .8s .5s ease both;
@@ -272,9 +273,22 @@
   .price-period { color: var(--muted); font-size: .9rem; margin-top: 4px; }
   .price-desc { color: var(--muted); margin-top: 16px; font-size: .95rem; line-height: 1.6; }
   .price-body { padding: 36px 40px; flex: 1; display: flex; flex-direction: column; }
-  .price-includes { list-style: none; display: flex; flex-direction: column; gap: 12px; text-align: left; margin-bottom: 32px; flex: 1; }
-  .price-includes li { display: flex; gap: 12px; color: var(--muted); font-size: .95rem; }
-  .price-includes li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+  .price-includes { list-style: none; display: flex; flex-direction: column; gap: 14px; text-align: left; margin-bottom: 32px; flex: 1; }
+  .price-includes li { 
+    position: relative; 
+    padding-left: 28px; 
+    color: var(--muted); 
+    font-size: .95rem; 
+    line-height: 1.4;
+  }
+  .price-includes li::before { 
+    content: '✓'; 
+    position: absolute; 
+    left: 0; 
+    top: 0;
+    color: var(--teal); 
+    font-weight: 700; 
+  }
   .price-includes li strong { color: var(--white); }
   .btn-book {
     display: block; width: 100%;
@@ -308,11 +322,30 @@
 
   /* ── RESPONSIVE ── */
   @media(max-width:600px) {
-    nav { padding: 16px 20px; }
+    section { padding: 60px 20px; }
+    nav { padding: 12px 16px; }
+    .nav-logo { font-size: 1.1rem; }
+    .nav-cta { padding: 8px 16px; font-size: 0.75rem; }
+
+    .hero { padding: 100px 20px 160px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .hero-badge { padding: 6px 16px; font-size: 0.7rem; margin-bottom: 24px; }
+    .hero-actions { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 280px; margin: 32px auto 0; }
+    .hero-actions a { width: 100%; height: 50px; text-align: center; padding: 0; font-size: 0.9rem; }
+    .hero-scroll { bottom: 80px; z-index: 10; }
+    .scroll-line { height: 32px; }
+
+    .coach-block { gap: 24px; margin-top: 32px; }
+    .coach-name { font-size: 2.5rem; margin-bottom: 8px; }
+    .coach-title { margin-bottom: 16px; }
+
     .stats { grid-template-columns: 1fr; }
-    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 24px; }
     .stat:last-child { border-bottom: none; }
+    
+    .price-amount { font-size: 4rem; }
   }
+
+  footer a:hover { color: var(--teal) !important; }
 </style>
 </head>
 <body>
@@ -454,7 +487,7 @@
       </div>
       <div>
         <div class="coach-name"><a href="https://hatemsoliman.dev" target="_blank" style="color:inherit; text-decoration:none;">Hatem<br>Soliman</a></div>
-        <div class="coach-title">Mindset & Lifestyle Coach · Stealth Strength Academy</div>
+        <div class="coach-title">Entrepreneur, Mindset & Lifestyle Coach · Stealth Strength Academy</div>
         <p class="coach-bio">
           Hatem built Stealth Strength Academy around one belief: <strong>physical strength and mental resilience are the same thing, trained differently.</strong>
           <br><br>
@@ -576,9 +609,77 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <p><strong>Stealth Strength Academy</strong> · Coaching by <a href="https://hatemsoliman.dev" target="_blank" style="color:var(--teal); text-decoration:none;">Hatem Soliman</a></p>
-  <p style="margin-top:8px;">© 2026 Stealth Strength Academy. All rights reserved.</p>
+<footer style="padding: 80px 24px 40px; border-top: 1px solid var(--border); background: var(--black);">
+  <div class="section-inner" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left;">
+    
+    <div class="footer-col">
+      <div class="nav-logo" style="margin-bottom: 20px;">Stealth Strength</div>
+      <p style="color: var(--muted); line-height: 1.6; font-size: 0.9rem; margin-bottom: 20px;">
+        Stealth Strength Academy is a results-first coaching platform dedicated to building unshakeable mindset and physical resilience. We focus on identity-level transformation for high-performers.
+      </p>
+      <p style="color: var(--muted); font-size: 0.8rem;">
+        <strong>Stealth Service:</strong> Confidentiality and discretion are our core pillars. Your journey remains your own.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 24px; color: var(--white);">Ecosystem</h4>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        
+        <div>
+          <a href="https://www.tawabiry.com" target="_blank" style="color: var(--white); text-decoration: none; font-weight: 600; display: block; margin-bottom: 2px; transition: color 0.2s;">Tawabiry</a>
+          <span style="font-size: 0.75rem; color: var(--muted); display: block;">Mobile-first Queue Management</span>
+        </div>
+
+        <div>
+          <a href="https://www.lingotype.hatemsoliman.dev" target="_blank" style="color: var(--white); text-decoration: none; font-weight: 600; display: block; margin-bottom: 2px; transition: color 0.2s;">LingoType</a>
+          <span style="font-size: 0.75rem; color: var(--muted); display: block;">Find your language archetype. Stop being mid.</span>
+        </div>
+
+        <div>
+          <a href="https://www.packship.dev" target="_blank" style="color: var(--white); text-decoration: none; font-weight: 600; display: block; margin-bottom: 2px; transition: color 0.2s;">PackShip</a>
+          <span style="font-size: 0.75rem; color: var(--muted); display: block;">The Developer's tool for NPM libraries.</span>
+        </div>
+
+        <div>
+          <a href="https://www.capprossbins.cappross.com" target="_blank" style="color: var(--white); text-decoration: none; font-weight: 600; display: block; margin-bottom: 2px; transition: color 0.2s;">CaprossBins</a>
+          <span style="font-size: 0.75rem; color: var(--muted); display: block;">Data Solutions for Marketers</span>
+        </div>
+
+        <div>
+          <a href="https://www.oldworldmindset.gumroad.com/l/edge" target="_blank" style="color: var(--white); text-decoration: none; font-weight: 600; display: block; margin-bottom: 2px; transition: color 0.2s;">Mindset Edge</a>
+          <span style="font-size: 0.75rem; color: var(--muted); display: block;">How to Build an Unshakeable Mind</span>
+        </div>
+
+        <div>
+          <span style="color: rgba(255,255,255,0.4); font-weight: 600; display: block; margin-bottom: 2px;">The Calm Coparent</span>
+          <span style="font-size: 0.75rem; color: var(--muted); display: block;">Coming Soon</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 20px; color: var(--white);">Navigation</h4>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
+        <li><a href="#guide" style="color: var(--muted); text-decoration: none;">Starter Guide</a></li>
+        <li><a href="#program" style="color: var(--muted); text-decoration: none;">The Program</a></li>
+        <li><a href="#book" style="color: var(--muted); text-decoration: none;">Book a Session</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="section-inner" style="margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; text-align: left;">
+    <p style="color: var(--muted); font-size: 0.8rem; text-align: left;">
+      &copy; <span id="current-year"></span> Stealth Strength Academy. All rights reserved. 
+      <br>Coaching by <a href="https://hatemsoliman.dev" target="_blank" style="color: var(--teal); text-decoration: none;">Hatem Soliman</a>
+    </p>
+    <div style="display: flex; gap: 20px; font-size: 0.8rem;">
+      <a href="terms.html" style="color: var(--muted); text-decoration: none;">Terms of Service</a>
+      <a href="privacy.html" style="color: var(--muted); text-decoration: none;">Privacy Policy</a>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -588,6 +689,9 @@ function toggleFaq(btn) {
   document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
+
+// Dynamic Copyright Year
+document.getElementById('current-year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
