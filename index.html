@@ -217,6 +217,10 @@
     display: flex; align-items: center; justify-content: center;
     overflow: hidden; position: relative;
   }
+  .coach-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
   .coach-img-placeholder {
     font-size: 6rem; opacity: .15;
   }
@@ -329,7 +333,7 @@
     <strong>mindset, habits, and life</strong> — empowering you to achieve lasting success and fulfillment.
   </p>
   <div class="hero-actions">
-    <a href="#book" class="btn-primary">Book Your Session — $150</a>
+    <a href="#book" class="btn-primary">Start for $50 / session</a>
     <a href="#program" class="btn-ghost">See the Program</a>
   </div>
   <div class="hero-scroll">
@@ -347,12 +351,12 @@
   </div>
 </div>
 
-<!-- FREE GUIDE -->
+<!-- STARTER GUIDE -->
 <section id="guide" style="background: var(--dark);">
   <div class="section-inner">
-    <div class="section-tag">🔥 Free Starter Guide</div>
+    <div class="section-tag">⚡ The Starter Guide</div>
     <h2 class="section-title">7-Day Bodyweight<br>Strength Guide</h2>
-    <p class="section-body">Your free entry point. No gym. No equipment. Just 9–12 minutes a day to build real strength, discipline, and momentum — starting from wherever you are right now.</p>
+    <p class="section-body">If you're hesitant about the full 3-month commitment, try our more affordable option: the 7-Day Guide. It's the perfect way to test the waters—if you like the results here, you'll definitely enjoy the depth of our coaching calls.</p>
     <div class="guide-grid">
       <div class="guide-card">
         <div class="guide-icon">📍</div>
@@ -445,11 +449,11 @@
     <div class="section-tag">👤 Your Coach</div>
     <div class="coach-block">
       <div class="coach-img-wrap">
-        <div class="coach-img-placeholder">🏋️</div>
-        <div class="coach-label">Hatem Soliman</div>
+        <img src="assets/h4temsoliman.png" alt="Hatem Soliman">
+        <div class="coach-label"><a href="https://hatemsoliman.dev" target="_blank" style="color:inherit; text-decoration:none;">Hatem Soliman</a></div>
       </div>
       <div>
-        <div class="coach-name">Hatem<br>Soliman</div>
+        <div class="coach-name"><a href="https://hatemsoliman.dev" target="_blank" style="color:inherit; text-decoration:none;">Hatem<br>Soliman</a></div>
         <div class="coach-title">Mindset & Lifestyle Coach · Stealth Strength Academy</div>
         <p class="coach-bio">
           Hatem built Stealth Strength Academy around one belief: <strong>physical strength and mental resilience are the same thing, trained differently.</strong>
@@ -490,10 +494,10 @@
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Is $150 per session worth it?
+          Is the investment worth it?
           <span class="arrow">+</span>
         </button>
-        <div class="faq-a">Consider what staying stuck is costing you — in performance, energy, relationships, and time. $150 is the price of one session with a coach who has one job: to make sure you are not in the same place in 90 days. Most clients report it pays for itself within the first month through increased focus and output alone.</div>
+        <div class="faq-a">Consider what staying stuck is costing you — in performance, energy, relationships, and time. At $50 per session, or $299 for the full 3-month journey, this coaching has one job: to make sure you are not in the same place in 90 days. Most clients report it pays for itself within the first month through increased focus and output alone.</div>
         <div class="faq-sep"></div>
       </div>
 
@@ -502,7 +506,7 @@
           Is this suitable for beginners?
           <span class="arrow">+</span>
         </button>
-        <div class="faq-a">Absolutely. The free 7-Day Guide is built for people who are starting from zero — no gym, no experience required. The coaching program meets you exactly where you are. Whether you are a complete beginner or someone who has been stuck at the same level for years, the program adapts to you.</div>
+        <div class="faq-a">Absolutely. The 7-Day Guide is built for people who are starting from zero — no gym, no experience required. The coaching program meets you exactly where you are. Whether you are a complete beginner or someone who has been stuck at the same level for years, the program adapts to you.</div>
         <div class="faq-sep"></div>
       </div>
 
@@ -524,31 +528,54 @@
     <div class="section-tag" style="text-align:center;">📅 Calendar Bookings</div>
     <h2 class="section-title">Book Your Session</h2>
     <p class="section-body" style="margin:0 auto 0;">Limited availability. Hatem works with a small number of clients at a time to ensure full focus on each person's transformation.</p>
-    <div class="price-block">
-      <div class="price-top">
-        <div class="price-label">1-on-1 Coaching Session</div>
-        <div class="price-amount">$150</div>
-        <div class="price-period">per session · 3-month program</div>
-        <p class="price-desc">With <strong style="color:var(--white)">Hatem Soliman</strong> · Stealth Strength Academy</p>
+    <div class="price-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 60px;">
+      
+      <!-- SINGLE SESSION -->
+      <div class="price-block">
+        <div class="price-top">
+          <div class="price-label">Individual Session</div>
+          <div class="price-amount">$50</div>
+          <div class="price-period">per session</div>
+          <p class="price-desc">With <strong style="color:var(--white)"><a href="https://hatemsoliman.dev" target="_blank" style="color:inherit; text-decoration:none;">Hatem Soliman</a></strong></p>
+        </div>
+        <div class="price-body">
+          <ul class="price-includes">
+            <li><strong>1-on-1 video session</strong> (45-60 min)</li>
+            <li><strong>Actionable insights</strong> for your week</li>
+            <li><strong>Direct messaging</strong> for follow-up</li>
+          </ul>
+          <a href="https://whop.com/joined/stealth-strength-academy/" class="btn-book">Book a Session →</a>
+        </div>
       </div>
-      <div class="price-body">
-        <ul class="price-includes">
-          <li><strong>Weekly 1-on-1 video session</strong> tailored to you</li>
-          <li><strong>Holistic transformation</strong> — body, mindset, work, family</li>
-          <li><strong>Mid-week accountability</strong> check-in included</li>
-          <li><strong>Direct message access</strong> between sessions</li>
-          <li><strong>Free 7-Day Bodyweight Guide</strong> included on signup</li>
-        </ul>
-        <a href="https://whop.com/joined/stealth-strength-academy/" class="btn-book">Book Your Session →</a>
-        <p class="price-note">Secure checkout via Whop · Instant calendar confirmation</p>
+
+      <!-- FULL JOURNEY -->
+      <div class="price-block" style="border-color: var(--teal); position: relative;">
+        <div style="position: absolute; top: 12px; right: 12px; background: var(--teal); color: var(--black); font-size: .65rem; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px;">Limited Time</div>
+        <div class="price-top" style="background: linear-gradient(135deg, rgba(0,255,180,0.12), rgba(0,200,255,0.08));">
+          <div class="price-label" style="color: var(--teal);">Full 3-Month Journey</div>
+          <div class="price-amount">$299</div>
+          <div class="price-period">total bundle price</div>
+          <p class="price-desc">The Complete Transformation</p>
+        </div>
+        <div class="price-body">
+          <ul class="price-includes">
+            <li><strong>Full 12-week program</strong> access</li>
+            <li><strong>Weekly video sessions</strong> included</li>
+            <li><strong>24/7 Priority access</strong> to Hatem</li>
+            <li><strong>Starter Guide</strong> included for free</li>
+            <li><strong>Identity-level</strong> mindset shifts</li>
+          </ul>
+          <a href="https://whop.com/joined/stealth-strength-academy/" class="btn-book" style="box-shadow: 0 0 50px rgba(0,255,180,0.3);">Get the Bundle →</a>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p><strong>Stealth Strength Academy</strong> · Coaching by Hatem Soliman</p>
+  <p><strong>Stealth Strength Academy</strong> · Coaching by <a href="https://hatemsoliman.dev" target="_blank" style="color:var(--teal); text-decoration:none;">Hatem Soliman</a></p>
   <p style="margin-top:8px;">© 2026 Stealth Strength Academy. All rights reserved.</p>
 </footer>
 

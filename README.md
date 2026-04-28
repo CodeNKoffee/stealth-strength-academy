@@ -8,7 +8,7 @@ Stealth Strength Academy is a premium coaching platform designed to transform yo
 
 This repository contains the landing page for Stealth Strength Academy, featuring:
 - **3-Month Transformation Program**: A comprehensive coaching journey from foundation to mastery.
-- **7-Day Bodyweight Strength Guide**: A free starter guide to build momentum with no equipment.
+- **7-Day Bodyweight Strength Guide**: An affordable starter guide to build momentum with no equipment.
 - **1-on-1 Coaching**: Personalized video sessions and direct accountability.
 
 ## ✨ Key Features
@@ -38,7 +38,7 @@ To view the landing page locally:
 
 ## 👤 About the Coach
 
-**Hatem Soliman** is a Mindset & Lifestyle Coach who believes in training the mind and body simultaneously. His approach is built on real-world resilience rather than superficial aesthetics.
+**[Hatem Soliman](https://hatemsoliman.dev)** is a Mindset & Lifestyle Coach who believes in training the mind and body simultaneously. His approach is built on real-world resilience rather than superficial aesthetics.
 
 ---
 
